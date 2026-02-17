@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Official Portal | Republic of Virex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --virex-navy: #0a192f;
+            --virex-gold: #c5a059;
+            --virex-gold-light: #e2cf9f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-virex-navy { background-color: var(--virex-navy); }
+        .text-virex-gold { color: var(--virex-gold); }
+        .border-virex-gold { border-color: var(--virex-gold); }
+
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(10, 25, 47, 0.95) 30%, rgba(10, 25, 47, 0.4) 100%);
+        }
+
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Enhanced Touch Targets */
+        .touch-target {
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid transparent;
+        }
+
+        /* Active states for touch feedback */
+        .service-card:active {
+            background-color: #f1f5f9;
+            transform: scale(0.98);
+        }
+
+        @media (min-width: 1024px) {
+            .service-card:hover {
+                border-left-color: var(--virex-gold);
+                transform: translateX(8px);
+                background-color: white;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Top State Bar -->
+    <div class="bg-[#050c1a] text-[10px] uppercase tracking-widest text-slate-400 py-2">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <span>Official Website: Republic of Virex</span>
+            <div class="hidden sm:flex gap-4">
+                <a href="#" class="touch-target hover:text-white">English</a>
+                <a href="#" class="touch-target hover:text-white">Accessibility</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="bg-virex-navy text-white sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo & Coat of Arms -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border-2 border-virex-gold rounded-full p-1">
+                        <svg viewBox="0 0 100 100" class="fill-virex-gold">
+                            <path d="M50 5 L90 30 L90 70 L50 95 L10 70 L10 30 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="15" />
+                            <path d="M50 20 V80 M20 50 H80" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="block text-lg sm:text-xl font-bold tracking-tight serif leading-none uppercase">VIREX</span>
+                        <span class="text-[8px] sm:text-[10px] tracking-[0.2em] text-virex-gold uppercase">Government Portal</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden lg:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#" class="touch-target hover:text-virex-gold transition-colors">Home</a>
+                    <a href="#" class="touch-target hover:text-virex-gold transition-colors">About</a>
+                    <a href="#contact" class="touch-target hover:text-virex-gold transition-colors">Services</a>
+                    <a href="#" class="touch-target hover:text-virex-gold transition-colors">Documents</a>
+                    <a href="#contact" class="ml-4 px-6 py-2.5 border border-virex-gold text-virex-gold rounded-sm hover:bg-virex-gold hover:text-virex-navy transition-all uppercase tracking-wider text-xs font-bold">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="menu-toggle" class="lg:hidden touch-target p-2 text-virex-gold" aria-label="Toggle Menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slide-out Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] lg:hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleMenu()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-3/4 max-sm bg-virex-navy p-8 shadow-2xl">
+            <button onclick="toggleMenu()" class="absolute top-6 right-6 text-virex-gold touch-target">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="flex flex-col space-y-6 mt-12">
+                <a href="#" class="text-2xl text-white font-bold serif border-b border-white/10 pb-4" onclick="toggleMenu()">Home</a>
+                <a href="#" class="text-xl text-slate-300" onclick="toggleMenu()">About Virex</a>
+                <a href="#contact" class="text-xl text-slate-300" onclick="toggleMenu()">Public Services</a>
+                <a href="#" class="text-xl text-slate-300" onclick="toggleMenu()">Legal Documents</a>
+                <a href="#contact" class="mt-4 px-6 py-4 bg-virex-gold text-virex-navy text-center font-bold uppercase tracking-widest" onclick="toggleMenu()">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[500px] lg:h-[650px] flex items-center overflow-hidden bg-slate-900">
+        <div class="absolute inset-0 opacity-40">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070" alt="Virex Infrastructure" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 w-full text-white py-20 lg:py-0">
+            <div class="max-w-2xl">
+                <div class="inline-block px-3 py-1 bg-virex-gold text-virex-navy text-[10px] font-bold uppercase tracking-widest mb-6">
+                    State Announcement
+                </div>
+                <h1 class="text-4xl md:text-7xl mb-6 leading-tight serif">
+                    Official Portal of the <span class="text-virex-gold">Republic of Virex</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-10 border-l-2 border-virex-gold pl-6 italic font-light">
+                    Innovation. Unity. Progress.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="w-full sm:w-auto px-10 py-4 bg-virex-gold text-virex-navy text-center font-bold hover:bg-virex-gold-light transition-all active:scale-95 shadow-lg uppercase tracking-widest text-sm">
+                        E-Services Directory
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quick Services & Announcements -->
+    <section class="py-16 lg:py-24 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-3 gap-12">
+            
+            <!-- News Section -->
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-end mb-8 border-b border-slate-200 pb-4">
+                    <h2 class="text-3xl font-bold text-virex-navy serif">National News</h2>
+                    <a href="#" class="text-virex-gold font-semibold text-sm hover:underline touch-target">View All →</a>
+                </div>
+                <div class="grid gap-8">
+                    <!-- VoltCoin News -->
+                    <article class="flex flex-col sm:flex-row gap-6 group cursor-pointer active:bg-slate-50 p-2 -m-2 rounded-lg transition-colors">
+                        <div class="w-full sm:w-48 h-40 sm:h-32 bg-slate-200 flex-shrink-0 overflow-hidden rounded">
+                            <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="VoltCoin">
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-virex-gold uppercase tracking-widest">Economy</span>
+                            <h3 class="text-xl font-bold mt-1 group-hover:text-blue-900 transition-colors">Virex Launches First National Digital Currency</h3>
+                            <p class="text-slate-600 mt-2 text-sm leading-relaxed">Central Bank introduces VoltCoin (VLT) for local trade and secure transactions under Supreme Founder Barok I.</p>
+                            <span class="text-xs text-slate-400 mt-2 block">February 17, 2026</span>
+                        </div>
+                    </article>
+                    
+                    <!-- Innovation Festival News -->
+                    <article class="flex flex-col sm:flex-row gap-6 group cursor-pointer active:bg-slate-50 p-2 -m-2 rounded-lg transition-colors">
+                        <div class="w-full sm:w-48 h-40 sm:h-32 bg-slate-200 flex-shrink-0 overflow-hidden rounded">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Festival">
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-virex-gold uppercase tracking-widest">Culture</span>
+                            <h3 class="text-xl font-bold mt-1 group-hover:text-blue-900 transition-colors">Glitchspire City Innovation Festival</h3>
+                            <p class="text-slate-600 mt-2 text-sm leading-relaxed">Showcasing cutting-edge technology and digital art, reinforcing the nation's commitment to tech talent.</p>
+                            <span class="text-xs text-slate-400 mt-2 block">February 17, 2026</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Side Announcements -->
+            <div class="space-y-8">
+                <!-- Registration Fees Information -->
+                <div class="bg-virex-navy p-6 sm:p-8 text-white rounded-sm relative overflow-hidden shadow-xl">
+                    <h3 class="text-xl font-bold mb-6 serif border-b border-white/10 pb-2">Government Services</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-white/10 border-l-2 border-virex-gold">
+                            <p class="text-[10px] font-bold text-virex-gold mb-1 uppercase tracking-widest">Online Registration</p>
+                            <p class="text-lg font-bold">Fee: $10.00 USD</p>
+                            <p class="text-xs text-slate-400 mt-1">Standard processing for official government database enrollment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-virex-navy mb-4 border-b pb-2 px-2">E-Government Services</h3>
+                    <div class="space-y-2">
+                        <!-- Direct Links to E-Services -->
+                        <a href="mailto:Virexgovoffical@gmail.com" class="service-card block p-5 bg-white border border-slate-100 font-medium text-virex-navy shadow-sm">
+                            <div class="flex justify-between items-center">
+                                <span>Official E-Mail Portal</span>
+                                <span class="text-[10px] bg-slate-100 px-2 py-1 rounded">Virexgovoffical</span>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/251912985834" target="_blank" class="service-card block p-5 bg-white border border-slate-100 font-medium text-virex-navy shadow-sm">
+                            <div class="flex justify-between items-center">
+                                <span>WhatsApp Government Line</span>
+                                <span class="text-[10px] bg-green-50 text-green-700 px-2 py-1 rounded">+251912985834</span>
+                            </div>
+                        </a>
+                        <a href="#" class="service-card block p-5 bg-white border border-slate-100 font-medium text-virex-navy shadow-sm">VoltCoin Wallet Access</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA / E-Services Anchor -->
+    <section id="contact" class="bg-virex-navy py-16 lg:py-24 scroll-mt-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl sm:text-4xl text-white mb-6 serif">Citizen Feedback & E-Services</h2>
+            <p class="text-slate-400 mb-10 text-sm sm:text-base">Connect with our administrative departments for official registration, inquiries, or assistance via our digital channels.</p>
+            <div class="grid sm:grid-cols-2 gap-4">
+                <a href="mailto:Virexgovoffical@gmail.com" class="bg-white/5 p-6 rounded border border-white/10 hover:bg-white/10 active:scale-95 transition-all text-center">
+                    <span class="block text-virex-gold text-[10px] font-bold uppercase mb-2 tracking-widest">Official Government Email</span>
+                    <span class="text-white text-sm sm:text-base break-all font-medium">Virexgovoffical@gmail.com</span>
+                </a>
+                <a href="https://wa.me/251912985834" target="_blank" class="bg-white/5 p-6 rounded border border-white/10 hover:bg-white/10 active:scale-95 transition-all text-center">
+                    <span class="block text-virex-gold text-[10px] font-bold uppercase mb-2 tracking-widest">WhatsApp Support</span>
+                    <span class="text-white text-base sm:text-lg font-medium">+251 91 298 5834</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050c1a] text-slate-500 py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 text-center lg:text-left">
+            <div class="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-8">
+                <div class="max-w-xs text-left">
+                    <span class="text-white font-bold serif mb-4 block">Republic of Virex</span>
+                    <p class="text-[10px] leading-relaxed">Official national gateway for legislation, citizen services, and digital economy updates.</p>
+                    <p class="text-[10px] mt-2 text-virex-gold font-bold">Registration Fee: $10.00 USD (Processing)</p>
+                </div>
+                <div class="flex gap-8 text-[10px] uppercase font-bold tracking-widest">
+                    <a href="#" class="hover:text-virex-gold touch-target">Legal</a>
+                    <a href="#" class="hover:text-virex-gold touch-target">Privacy</a>
+                    <a href="#" class="hover:text-virex-gold touch-target">Security</a>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-white/5 text-[10px] text-center">
+                © 2026 Office of the Digital Architect. Authorized by the Republic of Virex.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('open');
+            if(mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        const btns = document.querySelectorAll('button, a.service-card, a[href^="#"]');
+        btns.forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.classList.add('opacity-80');
+            });
+            btn.addEventListener('touchend', function() {
+                this.classList.remove('opacity-80');
+            });
+        });
+    </script>
+</body>
+</html>
